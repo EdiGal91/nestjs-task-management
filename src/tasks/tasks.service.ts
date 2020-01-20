@@ -9,7 +9,7 @@ export class TasksService {
         return this.tasks;
     }
 
-    createTask(title: string, description: string, status: TaskStatus = TaskStatus.OPEN) :void {
+    createTask(title: string, description: string, status: TaskStatus = TaskStatus.OPEN) :Task {
         const task: Task = {
             id: uuid(),
             title,
@@ -17,5 +17,6 @@ export class TasksService {
             status
         }
         this.tasks.push(task)
+        return task
     }
 }
