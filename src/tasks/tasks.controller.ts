@@ -1,12 +1,21 @@
 import { Task, TaskStatus } from './tasks.model';
 import { TasksService } from './tasks.service';
 import { Controller, Get, Post, Body } from '@nestjs/common';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 @Controller('tasks')
 export class TasksController {
     constructor(private tasksService: TasksService){
-        this.tasksService.createTask('t1', 'd1')
-        this.tasksService.createTask('t2', 'd2', TaskStatus.IN_PROGRESS)
+        const task1 = new CreateTaskDto()
+        task1.title = 't1'
+        task1.description = 'd1'
+        this.tasksService.createTask(task1)
+
+        const task2 = new CreateTaskDto()
+        task2.title = 't2'
+        task2.description = 'd2'
+        task2.status = TaskStatus.IN_PROGRESS
+        this.tasksService.createTask(task2)
     }
 
     @Get()
@@ -15,11 +24,8 @@ export class TasksController {
     }
 
     @Post()
-    createTask(
-        @Body('title') title: string,
-        @Body('description') description: string,
-        @Body('status') status: TaskStatus,
-    ) :Task {
-        return this.tasksService.createTask(title, description, status)
+    createTask(@Body() createTaskDto: CreateTaskDto) :Task {
+        console.log('createTask', createTaskDto)
+        return this.tasksService.createTask(createTaskDto)
     }
 }
