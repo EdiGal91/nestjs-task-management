@@ -26,4 +26,13 @@ export class TasksService {
         this.tasks.push(task)
         return task
     }
+
+    deleteTask(taskId: string): boolean{
+        const originalTasksLength = this.tasks.length
+        this.tasks = this.tasks.filter(task => task.id !== taskId)
+        const newTasksLength = this.tasks.length
+
+        const itemsDeleted = originalTasksLength - newTasksLength
+        return itemsDeleted > 0
+    }
 }
