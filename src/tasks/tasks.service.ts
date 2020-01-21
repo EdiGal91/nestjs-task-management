@@ -10,6 +10,10 @@ export class TasksService {
         return this.tasks;
     }
 
+    getTaskById(taskId): Task {
+        return this.tasks.find(task => task.id === taskId)
+    }
+
     createTask(createTaskDto: CreateTaskDto) :Task {
         const { title, description, status = TaskStatus.OPEN } = createTaskDto
         console.log('service createTask status::', status)
