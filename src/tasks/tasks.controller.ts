@@ -39,4 +39,8 @@ export class TasksController {
         return this.tasksService.deleteTask(taskId)
     }
 
+    @Post('/:id/status')
+    updateStatus(@Param('id') taskId: string, @Body('status') status: TaskStatus){
+        this.tasksService.updateStatus(taskId, status);
+    }
 }

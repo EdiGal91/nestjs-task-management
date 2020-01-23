@@ -14,7 +14,7 @@ export class TasksService {
         return this.tasks.find(task => task.id === taskId)
     }
 
-    createTask(createTaskDto: CreateTaskDto) :Task {
+    createTask(createTaskDto: CreateTaskDto): Task {
         const { title, description, status = TaskStatus.OPEN } = createTaskDto
         console.log('service createTask status::', status)
         const task: Task = {
@@ -34,5 +34,11 @@ export class TasksService {
 
         const itemsDeleted = originalTasksLength - newTasksLength
         return itemsDeleted > 0
+    }
+
+    updateStatus(taskId: string, status: TaskStatus): Task{
+        const task = this.getTaskById(taskId);
+        task.status = status;
+        return task;
     }
 }
