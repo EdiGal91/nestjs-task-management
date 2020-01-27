@@ -1,6 +1,11 @@
-import { TaskStatus } from '../tasks.model';
+import { TaskStatus } from "../tasks.model";
+import { IsNotEmpty } from "class-validator";
 export class CreateTaskDto {
-    title: string;
-    description: string;
-    status: TaskStatus;
+  @IsNotEmpty()
+  title: string;
+
+  @IsNotEmpty()
+  description: string;
+
+  status: TaskStatus;
 }
