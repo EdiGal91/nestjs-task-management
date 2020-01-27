@@ -40,7 +40,7 @@ export class TasksController {
     }
 
     @Post('/:id/status')
-    updateStatus(@Param('id') taskId: string, @Body('status') status: TaskStatus){
-        this.tasksService.updateStatus(taskId, status);
+    updateStatus(@Param('id') taskId: string, @Body('status') status: TaskStatus): Task{
+        return this.tasksService.updateStatus(taskId, status);
     }
 }
