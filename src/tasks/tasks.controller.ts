@@ -1,6 +1,6 @@
 import { Task, TaskStatus } from './tasks.model';
 import { TasksService } from './tasks.service';
-import { Controller, Get, Post, Body, Param, Delete, UsePipes } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 
 @Controller('tasks')
