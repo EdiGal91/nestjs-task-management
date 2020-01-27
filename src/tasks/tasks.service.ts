@@ -31,13 +31,16 @@ export class TasksService {
         return task
     }
 
-    deleteTask(taskId: string): boolean{
+    deleteTask(taskId: string): true{
         const originalTasksLength = this.tasks.length
         this.tasks = this.tasks.filter(task => task.id !== taskId)
         const newTasksLength = this.tasks.length
-
         const itemsDeleted = originalTasksLength - newTasksLength
-        return itemsDeleted > 0
+        
+        if(itemsDeleted === 0){
+            throw new NotFoundException(`Task with id ${taskId} not found`)
+        }
+        return true
     }
 
     updateStatus(taskId: string, status: TaskStatus): Task{
