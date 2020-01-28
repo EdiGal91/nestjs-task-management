@@ -11,6 +11,7 @@ import {
   ValidationPipe
 } from "@nestjs/common";
 import { CreateTaskDto } from "./dto/create-task.dto";
+import { TaskStatusValidationPipe } from "./pipes/task-status-validation.pipe";
 
 @Controller("tasks")
 export class TasksController {
@@ -39,7 +40,6 @@ export class TasksController {
 
   @Post()
   createTask(@Body() createTaskDto: CreateTaskDto): Task {
-    console.log("createTask", createTaskDto);
     return this.tasksService.createTask(createTaskDto);
   }
 
@@ -52,7 +52,7 @@ export class TasksController {
   @UsePipes(ValidationPipe)
   updateStatus(
     @Param("id") taskId: string,
-    @Body("status") status: TaskStatus
+    @Body("status", TaskStatusValidationPipe) status: TaskStatus
   ): Task {
     return this.tasksService.updateStatus(taskId, status);
   }

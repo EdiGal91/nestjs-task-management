@@ -20,7 +20,6 @@ export class TasksService {
 
     createTask(createTaskDto: CreateTaskDto): Task {
         const { title, description, status = TaskStatus.OPEN } = createTaskDto
-        console.log('service createTask status::', status)
         const task: Task = {
             id: uuid(),
             title,
